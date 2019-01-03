@@ -13809,6 +13809,32 @@ Predicted selling price for Client 3&#39;s home: $942,666.67
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">decribe</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13818,6 +13844,19 @@ Predicted selling price for Client 3&#39;s home: $942,666.67
 Predicted selling price for Client 1's home: $391,183.33</p>
 <p>Predicted selling price for Client 2's home: $189,123.53</p>
 <p>Predicted selling price for Client 3's home: $942,666.67</p>
+<p>statictic of prices in datasets:
+mean:454343
+stdev:165171</p>
+<p>features in this dataset:<br>
+rooms = 6.24<br>
+LSTAT mean = 12.94<br>
+PTRATIO mean =18.52</p>
+<p>Prediction prices of Clients 1 is at -0.38<em>sigma
+Clients 1 has fewer rooms/higher Neighborhood poverty level/fewer education resource than feature means, so the prices should be lower then the mean of prices of this dataset.
+Prediction prices of Clients 2 is at -1.605</em>sigma<br>
+Clients 2 has much fewer rooms/higher Neighborhood poverty level/fewer education resource than feature means, so the prices should be lower then the mean of prices of this dataset and lower then Clients 1.
+Prediction prices of Clients 3 is at  2.956*sigma<br>
+Clients 3 has more rooms/lower Neighborhood poverty level/higher education resource than feature means, so the prices should be higher then the mean of prices of this dataset.</p>
 <p>I think this predict is quite reasonable because people tends to pay more for bigger/more education resource/high class neighborhoods(in this case, high income).</p>
 
 </div>
