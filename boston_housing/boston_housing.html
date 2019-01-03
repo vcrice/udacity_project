@@ -12088,7 +12088,11 @@ Worth less. Higher PIRATTO means the population density is higher --&gt; living 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-Yes, because over 90% of variance is predictable.</p>
+Yes, because over 90% of variance is predictable.
+since total variance = explainable variance(variance comes from model predict) + error induce variance(not predict by model)<br>
+R2 score = explainable variance/total variance<br>
+so R2 score range is between 0~1 , (since variance is squared and always positive or zero)
+A R2 score ~90% is relatively high, since the model predict 90% of the variance of dependent variable.</p>
 
 </div>
 </div>
@@ -13537,7 +13541,13 @@ Because after that, the validation score starts decreasing, which mean it starts
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
 We won't know if the model is good until we actully train/fit it.
-So we create a grid of these hyper-parameters and train/fit with these grid points, then pick a best one.</p>
+So we create a grid of these hyper-parameters and train/fit with these grid points, then pick a best one.<br>
+While doing grid search, there are several items needed to be define :</p>
+<ol>
+<li>performance metrics : this is the indicator for choosing better model(in this case, R2 score).  </li>
+<li>model: the model type going to be trained (in this case, decision tree)</li>
+<li>hyper-parameters : model-building params we want to try,if there are more than 1 kind of hyper-parameters and each with levels more than 1, these combinations forms a "grid", which we will search in for the best combination. (in this case, we train decision tree model with different "max_depth", and try to find the best one by picking the model with best R2 score).   </li>
+</ol>
 
 </div>
 </div>
@@ -13565,8 +13575,16 @@ So we create a grid of these hyper-parameters and train/fit with these grid poin
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-Because doing grid search for fix split may result in pick up a hyper-parameters set which overfit this training/test split.
-By split training datas in to K-split, and treat one split as validation set/other K-1 split as training sets each time and take the average score, this reduce the overfitting possibility and also keeps the size of training datas(use 1/k for validation).</p>
+Because doing grid search for certain train data sets has the risk for picking up a model which is biased by this specific train/test sets(which means we may pick a model which is only good for this specific arrange of train/test split and not generalized well).<br>
+In order to prevent this:</p>
+<ol>
+<li>first split train data into k sets.  </li>
+<li>select a fixed "grid" point.  </li>
+<li>train model using k-1 sets of data and use the remain one as validation to check the model performance.  </li>
+<li>loop step 3 for K times with different validation set picked. and calculate mean of performance metrics for these result.  </li>
+<li>loop step 2,3 for all grid points.  </li>
+</ol>
+<p>This methods prevents bias for the train/split arrangement(each hyper-params combination is calculated by the mean of k kinds of arrangement of train/validation sets) and no big reduction to the train data size ((k-1)/k train data is used in each train)</p>
 
 </div>
 </div>
@@ -13800,6 +13818,7 @@ Predicted selling price for Client 3&#39;s home: $942,666.67
 Predicted selling price for Client 1's home: $391,183.33</p>
 <p>Predicted selling price for Client 2's home: $189,123.53</p>
 <p>Predicted selling price for Client 3's home: $942,666.67</p>
+<p>I think this predict is quite reasonable because people tends to pay more for bigger/more education resource/high class neighborhoods(in this case, high income).</p>
 
 </div>
 </div>
