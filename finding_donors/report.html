@@ -12855,6 +12855,19 @@ SZIkqbX/Dw7mqWDp/pY1AAAAAElFTkSuQmCC
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13149,21 +13162,22 @@ Not considering SVM because doing gridCV for these hyperparameters might be tric
 </ol>
 <p>Gradient Boosting:</p>
 <ol>
-<li>from examination data of a person --&gt; predict if this man is suffering certain disease. </li>
-<li>tree-based/ensemble method(ensemble is good against overfitting and provide good generalization), also because there are mix types of features(numerical+binary), tree-type algorithms can handle this better.  </li>
-<li>tree base+ensemble = hard to interpret (blackbox)   </li>
-<li>We have high dimensionality/binary+continous feature , enough data point and doing classification, tree+ensemble so suits well.  </li>
+<li>from personal information --&gt; predict if he/she is a terroist (security). </li>
+<li>tree-based/ensemble method(ensemble is good), since GBM create sequence trees base on error, if carefully tuned, could provide better performance than RF.And also GBM allows apply other custom loss func if it's differntialible.  </li>
+<li>On the other side, since GBM create sequence tree base on error of pre-iteration , means it's more likely to fit to data noise(real data are noisy) which cause overffitng (compare to RF). Also the hyperparameters needs to by tuned carefully.</li>
+<li>We have high dimensionality/binary+continous feature , enough data point and doing classification, tree+ensemble should suits well.  </li>
 </ol>
 <p>Random Forest:</p>
 <ol>
 <li>from examination data of a person --&gt; predict if this man is suffering certain disease.  </li>
-<li>tree-based/ensemble method(ensemble is good against overfitting and provide good generalization), also because there are mix types of features(numerical+binary), tree-type algorithms can handle this better.  </li>
-<li>tree base+ensemble = hard to interpret (blackbox)    </li>
-<li>We have high dimensionality/binary+continous feature , enough data point and doing classification, tree+ensemble so suits well.   </li>
+<li>tree-based/ensemble method(ensemble is good), because there are mix types of features(numerical+binary), tree-type algorithms can handle this better. Also since RF create tree by randomly select features it's good against dirty/noisy data. </li>
+<li>tree base+ensemble = hard to interpret (blackbox). And because it's resistance to noisy/dirty data ,on the other side, performance may not as good as GBM.      </li>
+<li>We have high dimensionality/binary+continous feature , enough data point and doing classification, tree+ensemble should suits well.   </li>
 </ol>
 <p>ref:<br>
 <a href="https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms">https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms</a><br>
-<a href="https://docs.microsoft.com/en-gb/azure/machine-learning/studio/algorithm-choice">https://docs.microsoft.com/en-gb/azure/machine-learning/studio/algorithm-choice</a></p>
+<a href="https://docs.microsoft.com/en-gb/azure/machine-learning/studio/algorithm-choice">https://docs.microsoft.com/en-gb/azure/machine-learning/studio/algorithm-choice</a><br>
+<a href="https://medium.com/@aravanshad/gradient-boosting-versus-random-forest-cfa3fa8f0d80">https://medium.com/@aravanshad/gradient-boosting-versus-random-forest-cfa3fa8f0d80</a></p>
 
 </div>
 </div>
