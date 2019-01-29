@@ -22336,18 +22336,11 @@ looks like in consistent.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong><br>
-select 50/50 samples from segment0/1 customers and further split to 25/25 for each 50 samples check their reactions(positive/negative) to delivery service change.<br>
-Use Chi-squared-test to check if null hypothesis holds : no difference between the reactions to delivery service change of segment0 and segment1.</p>
-
-<pre><code>        change     keep
-seg1     25        25
-
-seg2     25        25
-
-</code></pre>
+<p><strong>Answer:</strong></p>
+<p>Since we got customer segments, we can run A/B tests for both group one by one(can't choose any group as control and the other as experiment because we still don't know if this change might be group dependent).<br>
+For each group , control : 5days/week, exp:3days/week, and check the test result to decide if should apply service changes to that group.</p>
 <p>ref:<br>
-<a href="https://en.wikipedia.org/wiki/Chi-squared_test">https://en.wikipedia.org/wiki/Chi-squared_test</a></p>
+<a href="https://www.quora.com/When-should-A-B-testing-not-be-trusted-to-make-decisions/answer/Edwin-Chen-1">https://www.quora.com/When-should-A-B-testing-not-be-trusted-to-make-decisions/answer/Edwin-Chen-1</a></p>
 
 </div>
 </div>
