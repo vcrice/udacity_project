@@ -119,7 +119,7 @@ def plot_trials(csv):
 	ax = plt.subplot2grid((6,6), (2,3), colspan=3, rowspan=2)
 
 	# Check whether the agent was expected to learn
-	if csv != 'sim_no-learning.csv':
+	if not 'sim_no-learning' in csv:
 		ax.set_ylabel("Parameter Value")
 		ax.set_xlabel("Trial Number")
 		ax.set_xlim((1, len(training_data)))
