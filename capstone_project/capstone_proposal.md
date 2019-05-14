@@ -43,7 +43,7 @@ The datasets comes from <https://ceb.nlm.nih.gov/repositories/malaria-datasets/>
 
 The dataset contains a total of 27,558 cell images with equal instances of parasitized and uninfected cells.
 
-
+ref:
 
 1. <https://ceb.nlm.nih.gov/repositories/malaria-datasets/>
 
@@ -51,13 +51,19 @@ The dataset contains a total of 27,558 cell images with equal instances of paras
 
 *(approx. 1 paragraph)*
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+We can train a CNN like model for the task , which should have acceptable accuracy and can make predict in an acceptable time.
 
 ### Benchmark Model
 
 *(approximately 1-2 paragraphs)*
 
 In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+
+ref:
+
+1. <https://www.hindawi.com/journals/jtm/2018/3954717/>
+
+
 
 ### Evaluation Metrics
 
