@@ -11,29 +11,41 @@ May 13rd, 2019
 
 *(approx. 1-2 paragraphs)*
 
-Malaria is a mosquito-borne infectious disease that affects humans and other animals. Malaria causes symptoms that typically include fever, tiredness, vomiting and headaches. In severe cases it can cause yellow skin, seizures, coma, or death.
+Malaria is a mosquito-borne infectious disease that affects humans and other animals. Malaria causes symptoms that typically include fever, tiredness, vomiting and headaches. In severe cases it can cause yellow skin, seizures, coma, or death[2]. According to WHO data: In 2017, an estimated 219 million cases of malaria occurred worldwide and cause 435 000 deaths. Most cases were in the WHO Africa Region[3].
 
-Malaria is caused by Plasmodium parasites. The parasites are spread to people through the bites of infected female Anopheles mosquitoes, called "malaria vectors." There are 5 parasite species that cause malaria in humans, and 2 of these species – P. falciparum and P. vivax – pose the greatest threat. 
+Malaria is caused by Plasmodium parasites. The parasites are spread to people through the bites of infected female Anopheles mosquitoes. [1]. 
 
-According to WHO data: In 2017, an estimated 219 million cases of malaria occurred worldwide and cause 435 000 deaths. Most cases were in the WHO Africa Region. 
+According to CDC U.S., microscopy examination remains the "gold standard" for laboratory confirmation of malaria. By visually inspecting the blood smear specimen collected from patient under the microscopy , the laboratorian can determined if this patient is infected. However, the proficiency of laboratorian becomes a problem.
+
+ 
 
 ref:  
 
-1. <https://www.afro.who.int/health-topics/malaria>
+1. <https://www.who.int/news-room/fact-sheets/detail/malaria>
 2. <https://en.wikipedia.org/wiki/Malaria>
 3. <https://www.who.int/malaria/en/>
+4. <https://www.cdc.gov/malaria/diagnosis_treatment/diagnostic_tools.html#tabs-2-1>
 
 ### Problem Statement
 
 *(approx. 1 paragraph)*
 
-In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
+1. In  some non-tropical regions , malaria became rare (average 1700 cases in ths U.S per year), the laboratorians does not perform this test regularly.
+2. In some regions which are lack of medical resources (also suffered the most), well-trained Medical personnel who are able to justify test result, also hard to find.
+
+Base on previous statements, we can implement machine learning on the task classifying the microscopy images ,make the justification much more easier for medical personnel who may not so familiared with this task. 
 
 ### Datasets and Inputs
 
 *(approx. 2-3 paragraphs)*
 
-In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
+The datasets comes from <https://ceb.nlm.nih.gov/repositories/malaria-datasets/>. The cell images of Giemsa-stained thin blood smear slides from 150 P. falciparum-infected and 50 healthy patients were collected and photographed at Chittagong Medical College Hospital, Bangladesh.
+
+The dataset contains a total of 27,558 cell images with equal instances of parasitized and uninfected cells.
+
+
+
+1. <https://ceb.nlm.nih.gov/repositories/malaria-datasets/>
 
 ### Solution Statement
 
