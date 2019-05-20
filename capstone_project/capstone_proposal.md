@@ -9,8 +9,6 @@ May 13rd, 2019
 
 ### Domain Background
 
-*(approx. 1-2 paragraphs)*
-
 Malaria is a mosquito-borne infectious disease that affects humans and other animals. Malaria causes symptoms that typically include fever, tiredness, vomiting and headaches. In severe cases it can cause yellow skin, seizures, coma, or death[2]. According to WHO data: In 2017, an estimated 219 million cases of malaria occurred worldwide and cause 435 000 deaths. Most cases were in the WHO Africa Region[3].
 
 Malaria is caused by Plasmodium parasites. The parasites are spread to people through the bites of infected female Anopheles mosquitoes. [1]. 
@@ -28,7 +26,7 @@ ref:
 
 ### Problem Statement
 
-*(approx. 1 paragraph)*
+
 
 1. In  some non-tropical regions , malaria became rare (average 1700 cases in ths U.S per year), the laboratorians does not perform this test regularly.
 2. In some regions which are lack of medical resources (also suffered the most), well-trained Medical personnel who are able to justify test result, also hard to find.
@@ -36,8 +34,6 @@ ref:
 Base on previous statements, we can implement machine learning on the task classifying the microscopy images ,make the justification much more easier for medical personnel who may not so familiared with this task. 
 
 ### Datasets and Inputs
-
-*(approx. 2-3 paragraphs)*
 
 The datasets comes from <https://ceb.nlm.nih.gov/repositories/malaria-datasets/>. The cell images of Giemsa-stained thin blood smear slides from 150 P. falciparum-infected and 50 healthy patients were collected and photographed at Chittagong Medical College Hospital, Bangladesh.
 
@@ -49,33 +45,32 @@ ref:
 
 ### Solution Statement
 
-*(approx. 1 paragraph)*
-
-We can train a CNN like model for the task , which should have acceptable accuracy and can make predict in an acceptable time.
+We can train a CNN like model for the task , which should have acceptable accuracy/precision/recall. Also, considering we may need to run this model for making predictions on some terminal devices(like mobile phones), the model should by lightweight.
 
 ### Benchmark Model
 
-*(approximately 1-2 paragraphs)*
-
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+After surveyed several report, the reported accuracy of microscopy method is around 93~95% , the model should be comparable to that (Although the data source is different in these cases).
 
 ref:
 
-1. <https://www.hindawi.com/journals/jtm/2018/3954717/>
+1. <https://www.hindawi.com/journals/jpr/2019/1417967/>
+2. <https://www.ncbi.nlm.nih.gov/pubmed/19407111>
 
 
 
 ### Evaluation Metrics
 
-*(approx. 1-2 paragraphs)*
-
-In this section, propose at least one evaluation metric that can be used to quantify the performance of both the benchmark model and the solution model. The evaluation metric(s) you propose should be appropriate given the context of the data, the problem statement, and the intended solution. Describe how the evaluation metric(s) are derived and provide an example of their mathematical representations (if applicable). Complex evaluation metrics should be clearly defined and quantifiable (can be expressed in mathematical or logical terms).
+Since our data source is categorical balanced (equal instances for parasitized/uninfected ) , accuracy should be ok for the model evaluation . We can put precision/recall into consideration too (we care more about recall than precision in disease detection task.) 
 
 ### Project Design
 
 *(approx. 1 page)*
 
-In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
+1. Split data into train/validation/test split in ratio 0.8/0.1/0.1.
+2. Create image augmentation object for preprocessing and resizing , since the distribution of image sizing is from 50~200, resizing to 64*64 for computational effectiveness .![](C:\Users\MLADMIN\Downloads\sizedistribution.png) 
+3. Build CNN by using separable convolution layer (lightweight) with "selu" activations (self normalizations) and Global average pooling layer + dense layer for output.
+4. Train and select the model with best validation accuracy.
+5. Implement Grad-cam for CNN visualization and model check.
 
 ------
 
