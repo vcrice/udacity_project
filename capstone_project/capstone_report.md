@@ -1,4 +1,7 @@
+
+
 # Machine Learning Engineer Nanodegree
+
 ## Capstone Project
 Huan-Wei Wu  
 May 28st, 2019
@@ -20,7 +23,12 @@ ref:
 3. <https://www.who.int/malaria/en/>
 4. <https://www.cdc.gov/malaria/diagnosis_treatment/diagnostic_tools.html#tabs-2-1>
 
+
+
+
+
 ### Problem Statement
+
 Following previous discussion, we can say that:
 
 1. In  some non-tropical regions , malaria became rare (average 1700 cases in ths U.S per year), the laboratorians does not perform this test regularly.
@@ -28,7 +36,10 @@ Following previous discussion, we can say that:
 
 We can implement machine learning on classifying the microscopy images ,make the justification much more easier for medical personnel who may not so familiar with this task. This could make  malaria diagnosis faster and easier to execute. 
 
+
+
 ### Metrics
+
 Since our data source is categorical balanced (equal instances for parasitized/uninfected ) , accuracy should be ok for the model evaluation . We can also put precision/recall into consideration too (focus on better recall score, because it's more important for disease detection). Confusion matrix as follow: (parasitized : positive,  uninfected : negative in this case).
 
 |                                  | **Condition positive**  | **Condition Negative**  |
@@ -44,8 +55,10 @@ recall = \frac{tp}{tp+fn}
 $$
 ref : <https://en.wikipedia.org/wiki/Precision_and_recall>
 
+<div STYLE="page-break-after: always;"></div>
 
-## **II. Analysis**
+## II. Analysis
+
 **_(approx. 2-4 pages)_**
 
 ### **Data Exploration**/Exploratory Visualization
@@ -57,6 +70,8 @@ According to the descriptions : "Giemsa-stained thin blood smear slides from 150
 First, we print out some random choose images for both category :
 
 ![](C:\ML\udacity_project\capstone_project\random_images.png)
+
+<div STYLE="page-break-after: always;"></div>
 
 We can see that, the cell images with deep-purple regions shape likes dot/ring/half-moon/letter c, usually means the cell is infected. (more information  about  P. falciparum identification : <https://www.cdc.gov/dpdx/resources/pdf/benchAids/malaria/Pfalciparum_benchaidV2.pdf>)
 
@@ -152,7 +167,12 @@ Non-trainable params: 0
 
 
 
-### **Benchmark**
+
+
+
+
+### Benchmark
+
 After surveyed several report, the reported accuracy of microscopy method is around 93~95% , the model should be comparable to that (Although the data source is different in these cases).  
 
 Also, several transfer learning models implementation done by fastai as benchmarks : 
@@ -174,9 +194,7 @@ ref:
 2. <https://www.ncbi.nlm.nih.gov/pubmed/19407111>
 3. https://sgugger.github.io/the-1cycle-policy.html>)
 
-
-
-
+<div STYLE="page-break-after: always;"></div>
 
 
 ## **III. Methodology**
@@ -222,7 +240,10 @@ ref : <https://blog.datumbox.com/the-batch-normalization-layer-of-keras-is-broke
 
 
 
+
+
 ### **Refinement**
+
 1. First layer using standard convolution or separable convolution (with same output channel size) shows no big difference.
 
    | lr : 0.02,batch_size:32      | val_accuracy |
@@ -243,9 +264,7 @@ ref : <https://blog.datumbox.com/the-batch-normalization-layer-of-keras-is-broke
 
 3. Remove rotation augmentation in preprocess improve overall accuracy around 1% (due to key feature loss through rotation transform in some images, result in wrong labels). 
 
-
-
-
+<div STYLE="page-break-after: always;"></div>
 
 
 ## **IV. Results**
@@ -289,13 +308,15 @@ We implement Grad-Cam to check if our model really focus on reasonable features,
 
 (ref: <http://www.hackevolve.com/where-cnn-is-looking-grad-cam/>)
 
-![](C:\ML\udacity_project\capstone_project\gradcam_para.png)
+<img src="gradcam_para.png" width="500px" height="1620" />
 
-![](C:\ML\udacity_project\capstone_project\uninfected.png)
+<img src="uninfected.png" width="500px" height="1620" />
 
-We also check some images that was classified  error by model :
+<div STYLE="page-break-after: always;"></div>
 
-![](C:\ML\udacity_project\capstone_project\NG_CAM.png)
+We also check some images that was classified  error by model :<img src="NG_CAM.png" width="500px" height="1620" />
+
+<div STYLE="page-break-after: always;"></div>
 
 ### **Reflection**
 
