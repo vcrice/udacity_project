@@ -1,3 +1,10 @@
+---
+
+
+---
+
+
+
 # Machine Learning Engineer Nanodegree
 
 ## Capstone Proposal
@@ -49,7 +56,7 @@ We can train a CNN like model for the task , which should have acceptable accura
 
 ### Benchmark Model
 
-After surveyed several report, the reported accuracy of microscopy method is around 93~95% , the model should be comparable to that (Although the data source is different in these cases).
+After surveyed several report, the reported accuracy of microscopy method is around 93~95% , the model should be comparable to that (Although the data source is different in these cases). Also , compare this from scratch model with other models trained by transfer learning. 
 
 ref:
 
@@ -60,24 +67,21 @@ ref:
 
 ### Evaluation Metrics
 
-Since our data source is categorical balanced (equal instances for parasitized/uninfected ) , accuracy should be ok for the model evaluation . We can put precision/recall into consideration too (we care more about recall than precision in disease detection task.) 
+Since our data source is categorical balanced (equal instances for parasitized/uninfected ) , accuracy should be ok for the model evaluation . We can also put precision/recall into consideration too. (we care more about recall than precision in disease detection task.) 
+
+
 
 ### Project Design
 
-*(approx. 1 page)*
-
 1. Split data into train/validation/test split in ratio 0.8/0.1/0.1.
-2. Create image augmentation object for preprocessing and resizing , since the distribution of image sizing is from 50~200, resizing to 64*64 for computational effectiveness .![](C:\Users\MLADMIN\Downloads\sizedistribution.png) 
+
+2. Create image augmentation object for preprocessing and resizing , since the distribution of image sizing is from 50~200, resizing to 64*64 for computational effectiveness (also because resize image to bigger one will not increase the "information" contained).
+
+   ![](sizedistribution.png)
+
 3. Build CNN by using separable convolution layer (lightweight) with "selu" activations (self normalizations) and Global average pooling layer + dense layer for output.
-4. Train and select the model with best validation accuracy.
+
+4. Train and select the model with best validation accuracy, and compare with some transfer learning models.
+
 5. Implement Grad-cam for CNN visualization and model check.
 
-------
-
-**Before submitting your proposal, ask yourself. . .**
-
-- Does the proposal you have written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your proposal?
-- Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
