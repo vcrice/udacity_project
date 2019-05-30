@@ -36,6 +36,10 @@ Following previous discussion, we can say that:
 
 We can implement machine learning on classifying the microscopy images ,make the justification much more easier for medical personnel who may not so familiar with this task. This could make  malaria diagnosis faster and easier to execute. 
 
+Our goal is to build a model with good accuracy and easy to deploy in end devices (in other words : light-weighted).  CNN like structures has prove it's capability in images classification task, so we choose CNN base models for this task.
+
+First we split the data into train/test/split sets and resize/normalize to suitable format as model input. Then we train/tune a model with some technique focused on reducing weights, pick the one with best performance on validation set and test on test sets.
+
 
 
 ### Metrics
@@ -75,15 +79,23 @@ First, we print out some random choose images for both category :
 
 We can see that, the cell images with deep-purple regions shape likes dot/ring/half-moon/letter c, usually means the cell is infected. (more information  about  P. falciparum identification : <https://www.cdc.gov/dpdx/resources/pdf/benchAids/malaria/Pfalciparum_benchaidV2.pdf>)
 
+We can also look at some image densities distribution, since our images comes from Giemsa-stained blood smear slides, for each image we can see certain color (blue or red) has higher intensities distribution than others.
+
+![](C:\ML\udacity_project\capstone_project\dense1.png)
+
+![](C:\ML\udacity_project\capstone_project\dense2.png)
+
+<div STYLE="page-break-after: always;"></div>
+
 Next we investigated the distribution of images sizing :
 
-![](C:\ML\udacity_project\capstone_project\sizedistribution.png)
+![](C:\ML\udacity_project\capstone_project\sizedistributionx.png) ![](C:\ML\udacity_project\capstone_project\sizedistributiony.png)
 
- As the figure shows, the size distributed normally from 50~200 squared pixels, since we can overall resize image to 64X64 for computational cost. 
-
-
+ As the figure shows, the size distributed normally from 50~200 squared pixels and there are no big difference between X/Y length so we can overall resize image to 64X64 for computational cost. 
 
 
+
+<div STYLE="page-break-after: always;"></div>
 
 ### **Algorithms and Techniques**
 Since we are going to do image classification, a CNN base model will be a reasonable  choice.
@@ -125,7 +137,7 @@ Here propose a model building base on following features (light-weighted is pref
 
     (Act as a structural regularizer to prevent over-fitting reduction, <https://arxiv.org/pdf/1312.4400.pdf> ) 
 
-
+<div STYLE="page-break-after: always;"></div>
 
 **Model summary** :
 
@@ -226,21 +238,53 @@ This project all executed on kaggle kernel (with GPU) , the detailed docker imag
 
 For custom model : 
 
-The data augmentation/model building/training/evaluation all done by using *keras* (tensorflow backend)
+- The data augmentation/model building/training/evaluation all done by using *keras* (tensorflow backend),the final model summary as follow:
+
+```
+Layer (type)                 Output Shape              Param #   
+=================================================================
+separable_conv2d_1 (Separabl (None, 62, 62, 32)        155       
+_________________________________________________________________
+separable_conv2d_2 (Separabl (None, 30, 30, 32)        1344      
+_________________________________________________________________
+separable_conv2d_3 (Separabl (None, 28, 28, 32)        1344      
+_________________________________________________________________
+separable_conv2d_4 (Separabl (None, 13, 13, 32)        1344      
+_________________________________________________________________
+global_average_pooling2d_1 ( (None, 32)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 2)                 66        
+=================================================================
+Total params: 4,253
+Trainable params: 4,253
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+- The custom model was trained for 50 cycles with SGD(with Nesterov acceleration), save the model with best validation accuracy after each training epoch and load the weights as final model. SGD training sometimes goes wild and fail to converge in short time, re-initialize and re-start the training process is needed.
 
 For transfer learning benchmark models:
 
-The data augmentation/model building/training/evaluation all done by using *fastai*. 
+- The data augmentation/model building/training/evaluation all done by using *fastai*.  We trained 3 models (DenseNet121/ResNet50/VGG16 with batch normalization) with one-cycle-policy for 5 cycles, as benchmarks to our custom model.
+
 
 > This was because after recently update of *keras*, the build in Batch-Normalization layers, will using mini-batch statistics while training, but using pre-trained statistics while testing. If the learning datasets statistics are very different from pre-train datasets(in this case, the cell images are quite different compare to *imagenet* sets.), that leads to big discrepancy between train/test condition.
+>
+> So I decide to choose faster also stronger(compare to what I can do) implementation by fastai for bench mark models making.
+>
+> ref : <https://blog.datumbox.com/the-batch-normalization-layer-of-keras-is-broken/>
 
- So I decide to choose faster also stronger(compare to what I can do) implementation by fastai for bench mark models making.
+ 
 
-ref : <https://blog.datumbox.com/the-batch-normalization-layer-of-keras-is-broken/>
+The test process was done by accuracy/precision/recall score function imported from *sklearn* library.
 
+The Grad-Cam implementation modified from: <http://www.hackevolve.com/where-cnn-is-looking-grad-cam/>
 
+1. According to formula provided in original paper(<https://arxiv.org/abs/1610.02391>),the operation of convolution value of each feature map was 'sum' (not 'mean') before feed to 'relu' function.
+2. Heat-map normalizing was done by scale the [maximum.minimum] to [0,255] for each heat-map (just for enlarge the output contrast).
+3. After applied color-map to generate heat-map, needs to transfer from BGR to RGB before ploting by *matplotlib*  (the default channel arrangement for *opencv2* is BGR, *matplotlib* is RGB).
 
-
+ 
 
 ### **Refinement**
 
